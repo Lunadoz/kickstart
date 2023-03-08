@@ -64,14 +64,6 @@ rm -f /root/original-ks.cfg
 echo 'Remove the MAC address. If you have any static information like IP address, DNS, gateway, please delete those information in files'
 sed -i '/^UUID\|^HWADDR/Id' /etc/NetworkManager/system-connections/*.nmconnection
 
-#Remove configurations from /etc/resolv.conf
-echo 'Remove configurations from /etc/resolv.conf'
-echo -n > /etc/resolv.conf
-
-#Remove configurations from /etc/hosts
-echo 'Remove configurations from /etc/hosts'
-echo -n > /etc/hosts
-
 #Remove MAC to interface name associations
 echo 'Remove MAC to interface name associations'
 rm -rf /etc/udev/rules.d/70-persistent-*
