@@ -1,6 +1,6 @@
 #!/bin/bash
-#RHEL9
-#Source 
+#Seal a RHEL9 (for template)
+#Source:
 #https://access.redhat.com/solutions/5793031
 #https://access.redhat.com/documentation/fr-fr/red_hat_update_infrastructure/3.0/html/system_administrators_guide/create_client_images_and_templates
 
@@ -14,13 +14,13 @@ fi
 #Kill udev
 killall -9 udevd
 
-# Remove all files in /var that are not owned by an RPM
+#Remove all files in /var that are not owned by an RPM
 for FILE in `find /var -type f`
 do
 	rpm -qf --quiet "$FILE" || rm -f "$FILE"
 done
 
-# Remove empty directories in /var that are not owned by an RPM
+#Remove empty directories in /var that are not owned by an RPM
 until [ "$REMOVED_DIR" = false ]
 do
 	REMOVED_DIR=false
@@ -34,15 +34,11 @@ do
 	done
 done
 
-# Truncate any remaining files in /var/log
+#Truncate any remaining files in /var/log
 for FILE in `find /var/log -type f`
 do
 	echo -n > "$FILE"
 done
-
-#Remove history dnf
-dnf clean all
-rm -r /var/lib/dnf/history*
 
 #Remove history files
 rm -f /root/.bash_history
