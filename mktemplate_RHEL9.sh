@@ -11,6 +11,13 @@ then
 	exit 3
 fi
 
+#Check histfile
+if [ -n "$HISTFILE" ]
+then
+	echo 'Please unset HISTFILE'
+	exit 4
+fi
+
 #Kill udev
 echo 'Kill udev'
 killall -9 udevd
